@@ -1,16 +1,20 @@
-def main():
-    beer_song(3)
+bottles = 99
+while bottles > 2:
+    print(str(bottles) + " bottles of beer on the wall,")
+    print(str(bottles) + " bottles of beer")
+    print("Take one down, pass it around")
+    print(str(bottles-1) + "bottles of beer on the wall\n\n")
+    bottles -= 1
 
+print(str(bottles) + " bottles of beer on the wall,")
+print(str(bottles) + " bottles of beer")
+print("Take one down, pass it around")
+print(str(bottles-1) + "bottles of beer on the wall\n\n")
+bottles -= 1
 
-def beer_song(count):
-    num = 0
-    while num < count:
-        print(count, 'bottles of beer on the wall,')
-        print(count, 'bottles of beer')
-        print('Take one down, pass it around')
-        count -= 1
-        print(count, 'bottles of beer on the wall \n\n')
-
-
-
-main()
+print(str(bottles) + " bottles of beer on the wall,")
+print(str(bottles) + " bottles of beer")
+print("Take one down, pass it around")
+print(str(bottles - 1) + "bottles of beer on the wall\n\n")
+bottles -= 1
+print(str(bottles) + " bottles of beer on the wall")
