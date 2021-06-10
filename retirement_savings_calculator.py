@@ -11,15 +11,13 @@ print("You have " + str(years_until_retirement) + " years left until you retires
 year = 0
 
 print("This projection assumes a 3% raise each year and a 6% yearly return on investment")
-print("    YEAR         INCOME          SAVINGS CONTRIBUTIONS           TOTAL SAVINGS")
+print("    YEAR        INCOME          SAVINGS CONTRIBUTIONS           TOTAL SAVINGS")
 while year < years_until_retirement:
     year += 1
     income += pay_raise * income
-    print(format(year, "6,.0f") + format(income, "16,.0f"))
-
-total_savings = savings * investment
-contribution = income * percentage
-while years_until_retirement > 0:
+    total_savings = savings * investment
+    contribution = income * percentage
     years_until_retirement -= 1
     total_savings += contribution
-    print(format(total_savings, "46,.0f"))
+    print(format(year, "8,.0f") + format(income, "14,.0f") + format(contribution, "25,.0f")
+          + format(total_savings, "30,.0f"))
