@@ -119,21 +119,27 @@ print("Average is: ", average)
 # -- read the contents of the file into the list states_list
 # -- print the contents of states_list on screen
 filename = open("states.txt", 'r')
-states_list = filename. readlines()
+states_list = filename.readlines()
 print(states_list)
-
 
 # TODO 7.8 Two-Dimensional Lists
 print("=" * 10, "Section 7.8 two-dimensional lists", "=" * 10)
 # 1) Create a new two dimensional list that has the months of the year
 #     and the days in each month during a non leap year
 #     For example, the first entry should be: January, 31
+months_days = [["January", "31"], ["February", "28"], ["March", "31"], ["April", "30"], ["May", "31"],
+               ["June", "30"], ["July", "31"], ["August", "30"], ["September", "30"], ["October", "31"],
+               ["November", "30"], ["December", "31"]]
 
 # 2) Print the contents of the entire list
+print(months_days)
 
 # 3) Print just the values for index 3,0 and 3,1
-
+print(months_days[3][0])
+print(months_days[3][1])
 # TODO 7.9 Tuples
 print("=" * 10, "Section 7.9 tuples", "=" * 10)
 # Create a tuple using the months list as its data source
 months = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+months_tuple = tuple(months)
+print(months_tuple)
