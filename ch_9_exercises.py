@@ -73,7 +73,8 @@ import pickle
 file = open('sample.bin', 'wb')
 
 # 3) Pickle the miles_ridden dictionary and output it to the log file
-sample = pickle.mile_ridden()
+
+sample = pickle.miles_ridden()
 
 # 4) Close the log file
 file.close()
