@@ -1,13 +1,14 @@
 def main():
     total = 0.0
     count = 0
-    data = open("rainfall-totals.txt", 'r')
+    data_file = open("rainfall-totals.txt", 'r')
+    data = data_file.readlines()
+    data_file.close()
     for line in data:
         line = line.rstrip("\n")
         rain = line.split()
         rain_month = rain[0]
         rain_amt = rain[1].split('.')
-        data.close()
 
         if rain_amt[0].isdigit() and rain_amt[1].isdigit():
             amount = float(rain_amt[0] + "." + rain_amt[1])
