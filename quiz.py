@@ -1,19 +1,28 @@
 def main():
-    language = {'one': 'nje', 'two': 'dy', 'three': 'tre', 'four': 'kater', 'five': 'pese',
-                'six': 'gjashte', 'seven': 'shtate', 'eight': 'tete', 'nine': 'nente', 'ten': 'dhjete'}
-    print("QUIZ \n")
-    number = int(input("Enter the number in English which corresponds to the number in Albanian: "))
-    print("\nYou got {1}.".format(number, quiz(language), len(language)))
+    correct = 0
+    print("Enter the number in English which corresponds to the number in Albanian: ")
+    numbers = {'nje': 'one', 'dy': 'two', 'tre': 'three', 'kater': 'four', 'pese': 'five',
+               'gjashte': 'six', 'shtate': 'seven', 'tete': 'eight', 'nente': 'nine', 'dhjete': 'ten'}
 
-
-def quiz(language):
-    score = 0
-    for number in language.item():
-        if input(number).lower() == number.lower():
-            score += 1
-            print("Correct!")
+    for num in numbers:
+        answer = input("What is the equivalent of " + num + ": ")
+        answer = answer.lower()
+        if numbers[num] == answer:
+            print("Correct\n")
+            correct += 1
         else:
-            print("Incorrect")
+            print("Incorrect.The answer was " + numbers[num] + '\n')
+    print("You got " + str(correct))
+    if correct == 10 or correct == 9:
+        print("A")
+    elif correct == 8:
+        print("B")
+    elif correct == 7:
+        print("C")
+    elif correct == 6:
+        print("D")
+    else:
+        print("F")
 
 
 main()
