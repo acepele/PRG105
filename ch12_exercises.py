@@ -42,19 +42,18 @@ print("=" * 10, "Section 12.2-12.3 problem solving with recursion", "=" * 10)
 #    and it should return the sum of the list values.
 # Hint: Each iteration should remove one item from the list.
 # The recursion should end when all items have been removed from the list.
-def main():
-    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    my_sum = range_sum(numbers, 0, 14)
-    print('The sum of items in the list is ', my_sum)
-
-
-def range_sum(num_list, start, end):
-    if start > end:
-        return 0
+def math_stuff(my_numbers):
+    if len(my_numbers) > 1:
+        my_numbers[0] = my_numbers[0] + my_numbers[1]
+        my_numbers.pop(1)
+        # print(my_numbers)
+        math_stuff(my_numbers)
     else:
-        return num_list[start] + range_sum(num_list, start + 1, end)
+        print(my_numbers[0])
 
 
 main()
 
 # 2) Call the function using the numbers list as a parameter
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 8, 10, 11, 12, 13, 14, 15]
+math_stuff(numbers)
