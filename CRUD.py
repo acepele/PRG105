@@ -10,26 +10,26 @@ QUIT = 5
 def main():
     try:
         import_file = open("costumer_file.dat", 'rb')
-        costumers = pickle.load(input_file)
+        costumer = pickle.load(import_file)
+        import_file.close()
     except (FileNotFoundError, IOError):
-        print("file not found, please add a costumer and the quit to create the file")
-        costumers = {}
+        costumer = {}
 
     choice = 0
 
     while choice != QUIT:
-        choice = menu
+        choice = menu()
 
         if choice == LOOK_UP:
-            look_up(costumers)
+            look_up(costumer)
         elif choice == ADD:
-            add(costumers)
+            add(costumer)
         elif choice == CHANGE:
-            change(costumers)
+            change(costumer)
         elif choice == DELETE:
-            delete(costumers)
+            delete(costumer)
         elif choice == QUIT:
-            save(costumers)
+            save(costumer)
 
 
 def menu():
@@ -57,6 +57,7 @@ def add(costumers):
     phone = input("Enter costumer phone number: ")
     if name not in costumers:
         costumers[name] = phone
+        save(costumers)
     else:
         print("That entry already exists.")
 
