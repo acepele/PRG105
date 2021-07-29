@@ -37,56 +37,18 @@ class CrudGUI:
 
     def open_menu(self):
         if self.radio_var.get() == 1:
-            search = LookGUI(self.master)
+            _ = LookGUI(self.master)
         elif self.radio_var.get() == 2:
-            search = AddGUI(self.master)
+            _ = AddGUI(self.master)
         elif self.radio_var.get() == 3:
-            search = ChangeGUI(self.master)
+            _ = ChangeGUI(self.master)
         elif self.radio_var.get() == 4:
-            search = DeleteGUI(self.master)
+            _ = DeleteGUI(self.master)
         else:
             tkinter.messagebox.showinfo('Function', 'still under construction')
 
 
 class LookGUI:
-    def __init__(self, master):
-
-        try:
-            input_file = open("costumer_file.dat", 'rb')
-            self.costumers = pickle.load(input_file)
-            input_file.close()
-
-        except (FileNotFoundError, IOError):
-            self.costumers = {}
-
-
-class AddGUI:
-    def __init__(self, master):
-
-        try:
-            input_file = open("costumer_file.dat", 'rb')
-            self.costumers = pickle.load(input_file)
-            input_file.close()
-
-        except (FileNotFoundError, IOError):
-            self.costumers = {}
-
-
-class ChangeGUI:
-
-    def __init__(self, master):
-
-        try:
-            input_file = open("costumer_file.dat", 'rb')
-            self.costumers = pickle.load(input_file)
-            input_file.close()
-
-        except (FileNotFoundError, IOError):
-            self.costumers = {}
-
-
-class DeleteGUI:
-
     def __init__(self, master):
 
         try:
@@ -137,9 +99,173 @@ class DeleteGUI:
         self.look.destroy()
 
 
+class AddGUI:
+    def __init__(self, master):
+
+        try:
+            input_file = open("costumer_file.dat", 'rb')
+            self.costumers = pickle.load(input_file)
+            input_file.close()
+
+        except (FileNotFoundError, IOError):
+            self.costumers = {}
+
+        self.master = master
+        self.add = tkinter.Toplevel(master)
+        self.add.title('Add a costumer')
+
+        self.top_frame = tkinter.Frame(self.add)
+        self.middle_frame = tkinter.Frame(self.add)
+        self.bottom_frame = tkinter.Frame(self.add)
+
+        self.add_label = tkinter.Label(self.top_frame, text='Enter costumer name to add: ')
+        self.add_entry = tkinter.Entry(self.top_frame, width=15)
+        self.email_label = tkinter.Label(self.top_frame, text='Enter the costumer email: ')
+        self.email_entry = tkinter.Entry(self.top_frame, width=15)
+
+        self.add_label.pack(side='left')
+        self.add_entry.pack(side='left')
+        self.email_label.pack(side='left')
+        self.email_entry.pack(side='left')
+
+        self.value = tkinter.StringVar()
+        self.info = tkinter.Label(self.middle_frame, text='Results: ')
+        self.result_label = tkinter.Label(self.middle_frame, Textvariable=self.value)
+
+        self.info.pack(side='left')
+        self.result_label.pack(side='left')
+
+        self.add_button = tkinter.Button(self.bottom_frame, text='Add', command=self.add_person)
+        self.back_button = tkinter.Button(self.bottom_frame, text='Main Menu', command=self.back)
+
+        self.add_button.pack(side='left')
+        self.back_button.pack(side='left')
+
+        self.top_frame.pack()
+        self.middle_frame.pack()
+        self.bottom_frame.pack()
+
+    def add_person(self):
+        name = self.add_entry.get()
+        email = self.email_entry.get()
+        if name in self.costumers:
+            result = name + "already exists"
+        else:
+            result = name + " " + email + ' will be added'
+            self.costumers[name] = email
+            output_file = open("costumer_file.dat", 'wb')
+            pickle.dump(self.costumers, output_file)
+            output_file.close()
+        self.value.set(result)
+
+    def back(self):
+        self.add.destroy()
+
+
+class ChangeGUI:
+    def __init__(self, master):
+
+        try:
+            input_file = open("costumer_file.dat", 'rb')
+            self.costumers = pickle.load(input_file)
+            input_file.close()
+
+        except (FileNotFoundError, IOError):
+            self.costumers = {}
+
+        self.master = master
+        self.change = tkinter.Toplevel(master)
+        self.change.title('Search for costumer')
+
+        self.top_frame = tkinter.Frame(self.change)
+        self.middle_frame = tkinter.Frame(self.change)
+        self.bottom_frame = tkinter.Frame(self.change)
+
+        self.search_label = tkinter.Label(self.top_frame, text='Enter costumer name to change: ')
+        self.search_entry = tkinter.Entry(self.top_frame, width=15)
+
+        self.search_label.pack(side='left')
+        self.search_entry.pack(side='left')
+
+        self.value = tkinter.StringVar()
+        self.info = tkinter.Label(self.middle_frame, text='Results: ')
+        self.result_label = tkinter.Label(self.middle_frame, Textvariable=self.value)
+
+        self.info.pack(side='left')
+        self.result_label.pack(side='left')
+
+        self.search_button = tkinter.Button(self.bottom_frame, text='Search', command=self.search)
+        self.back_button = tkinter.Button(self.bottom_frame, text='Main Menu', command=self.back)
+
+        self.search_button.pack(side='left')
+        self.back_button.pack(side='left')
+
+        self.top_frame.pack()
+        self.middle_frame.pack()
+        self.bottom_frame.pack()
+
+    def search(self):
+        name = self.search_entry.get()
+        result = self.costumers.get(name, 'Not Found')
+        self.value.set(result)
+
+    def back(self):
+        self.change.destroy()
+
+
+class DeleteGUI:
+    def __init__(self, master):
+
+        try:
+            input_file = open("costumer_file.dat", 'rb')
+            self.costumers = pickle.load(input_file)
+            input_file.close()
+
+        except (FileNotFoundError, IOError):
+            self.costumers = {}
+
+        self.master = master
+        self.delete = tkinter.Toplevel(master)
+        self.delete.title('Delete a costumer')
+
+        self.top_frame = tkinter.Frame(self.delete)
+        self.middle_frame = tkinter.Frame(self.delete)
+        self.bottom_frame = tkinter.Frame(self.delete)
+
+        self.delete_label = tkinter.Label(self.top_frame, text='Enter costumer name to delete: ')
+        self.delete_entry = tkinter.Entry(self.top_frame, width=15)
+
+        self.delete_label.pack(side='left')
+        self.delete_entry.pack(side='left')
+
+        self.value = tkinter.StringVar()
+        self.info = tkinter.Label(self.middle_frame, text='Results: ')
+        self.result_label = tkinter.Label(self.middle_frame, Textvariable=self.value)
+
+        self.info.pack(side='left')
+        self.result_label.pack(side='left')
+
+        self.delete_button = tkinter.Button(self.bottom_frame, text='Delete', command=self.delete_person)
+        self.back_button = tkinter.Button(self.bottom_frame, text='Main Menu', command=self.back)
+
+        self.delete_button.pack(side='left')
+        self.back_button.pack(side='left')
+
+        self.top_frame.pack()
+        self.middle_frame.pack()
+        self.bottom_frame.pack()
+
+    def delete_person(self):
+        delete = self.delete_entry.get()
+        self.value.set(delete)
+
+    def back(self):
+        self.delete.destroy()
+
+
 def main():
     root = tkinter.Tk()
-    menu_gui = CrudGUI(root)
+    _ = CrudGUI(root)
     root.mainloop()
 
 
